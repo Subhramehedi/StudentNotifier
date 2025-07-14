@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al Ameen Mission Academy Nayabaz - Guardian Registration</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+      }
+
+      .school-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .flag {
+        width: 30px;
+        height: 20px;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+
+      .form-content {
+        padding: 30px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border-left: 4px solid #4caf50;
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .section-title::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: #4caf50;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 5px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+      }
+
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .popup-content {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 70vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .popup-close:hover {
+        color: #333;
+      }
+
+      .popup-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .popup-item {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: slideIn 0.3s ease;
+      }
+
+      .popup-item:hover {
+        background: #f0f8ff;
+        transform: translateX(5px);
+      }
+
+      .popup-item:last-child {
+        border-bottom: none;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .digit-input {
+        display: flex;
+        gap: 8px;
+        margin: 10px 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .digit-box {
+        width: 40px;
+        height: 50px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        background: white;
+        transition: all 0.3s ease;
+      }
+
+      .digit-box:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin: 15px 0;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 25px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .search-suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+        display: none;
+        z-index: 100;
+      }
+
+      .suggestion-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .suggestion-item:hover,
+      .suggestion-item.highlighted {
+        background: #f0f8ff;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 15px;
+        margin: 15px 0;
+        flex-wrap: wrap;
+      }
+
+      .form-group {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .guardian-card {
+        background: white;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        position: relative;
+      }
+
+      .guardian-card.main {
+        border-color: #4caf50;
+        background: #f8fff8;
+      }
+
+      .remove-guardian {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .submit-btn {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        font-size: 18px;
+        padding: 15px 40px;
+        margin: 20px auto;
+        display: block;
+      }
+
+      .review-content {
+        text-align: left;
+        line-height: 1.6;
+      }
+
+      .review-section {
+        margin: 15px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .flag-icon {
+        width: 20px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+          border-radius: 15px;
+        }
+
+        .form-content {
+          padding: 20px;
+        }
+
+        .digit-input {
+          justify-content: space-between;
+        }
+
+        .digit-box {
+          width: calc(18% - 5px);
+          height: 45px;
+          font-size: 16px;
+        }
+
+        .form-row {
+          flex-direction: column;
+        }
+
+        .form-group {
+          min-width: auto;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .digit-input.phone {
+          justify-content: center;
+        }
+
+        .digit-input.phone .digit-box {
+          width: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <img
+            src="https://play-lh.googleusercontent.com/gufR1twVlU6_SzC-iIAD_8bLLf-XYVAwwwwJF-cphD32IX0GeHNLi4GrN42hRYDHg-A"
+            alt="School Logo"
+          />
+        </div>
+        <div class="school-name">
+          Al Ameen Mission Academy Nayabaz
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
+            alt="India Flag"
+            class="flag"
+          />
+        </div>
+      </div>
+
+      <div class="form-content">
+        <!-- Student Information Section -->
+        <div class="section">
+          <div class="section-title">Student Information</div>
+
+          <button class="btn" id="selectClassBtn">Select Class</button>
+          <div
+            id="selectedClass"
+            style="margin: 10px 0; font-weight: bold"
+          ></div>
+
+          <button class="btn" id="selectRoomBtn" disabled>Select Room</button>
+          <div
+            id="selectedRoom"
+            style="margin: 10px 0; font-weight: bold"
+          ></div>
+
+          <button class="btn" id="selectStudentBtn" disabled>
+            Select Student
+          </button>
+          <div
+            id="selectedStudent"
+            style="margin: 10px 0; font-weight: bold"
+          ></div>
+
+          <div id="manualStudentEntry" style="display: none">
+            <div class="search-container">
+              <input
+                type="text"
+                class="search-input"
+                id="studentSearch"
+                placeholder="Search student by name..."
+              />
+              <div class="search-suggestions" id="searchSuggestions"></div>
+            </div>
+
+            <div style="margin: 20px 0">
+              <label>Registration Number:</label>
+              <div class="digit-input" id="regNumberInput">
+                <input
+                  type="text"
+                  class="digit-box"
+                  maxlength="1"
+                  inputmode="numeric"
+                />
+                <input
+                  type="text"
+                  class="digit-box"
+                  maxlength="1"
+                  inputmode="numeric"
+                />
+                <input
+                  type="text"
+                  class="digit-box"
+                  maxlength="1"
+                  inputmode="numeric"
+                />
+                <input
+                  type="text"
+                  class="digit-box"
+                  maxlength="1"
+                  inputmode="numeric"
+                />
+                <input
+                  type="text"
+                  class="digit-box"
+                  maxlength="1"
+                  inputmode="numeric"
+                />
+                <input
+                  type="text"
+                  class="digit-box"
+                  maxlength="1"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guardian Information Section -->
+        <div class="section">
+          <div class="section-title">Guardian Information</div>
+          <div id="guardianContainer">
+            <div class="guardian-card main" id="mainGuardian">
+              <h3>Main Guardian</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Guardian Name:</label>
+                  <input type="text" id="guardianName" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Phone Number:</label>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
+                    alt="India Flag"
+                    class="flag-icon"
+                  />
+                  <div class="digit-input phone" id="phoneInput">
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                    <input
+                      type="text"
+                      class="digit-box"
+                      maxlength="1"
+                      inputmode="numeric"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <button class="btn" id="selectRelationshipBtn">
+                    Select Relationship
+                  </button>
+                  <div
+                    id="selectedRelationship"
+                    style="margin: 10px 0; font-weight: bold"
+                  ></div>
+                  <input
+                    type="text"
+                    id="customRelationship"
+                    placeholder="Enter relationship"
+                    style="display: none"
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <button class="btn" id="selectStateBtn">Select State</button>
+                  <div
+                    id="selectedState"
+                    style="margin: 10px 0; font-weight: bold"
+                  ></div>
+                </div>
+              </div>
+
+              <div id="wbFields" style="display: none">
+                <div class="form-row">
+                  <div class="form-group">
+                    <button class="btn" id="selectDistrictBtn" disabled>
+                      Select District
+                    </button>
+                    <div
+                      id="selectedDistrict"
+                      style="margin: 10px 0; font-weight: bold"
+                    ></div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <button class="btn" id="selectPoliceStationBtn" disabled>
+                      Select Police Station
+                    </button>
+                    <div
+                      id="selectedPoliceStation"
+                      style="margin: 10px 0; font-weight: bold"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="addressFields" style="display: none">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Village/City:</label>
+                    <input type="text" id="villageCity" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Post Office:</label>
+                    <input type="text" id="postOffice" required />
+                  </div>
+                </div>
+
+                <div
+                  class="form-row"
+                  id="manualAddressFields"
+                  style="display: none"
+                >
+                  <div class="form-group">
+                    <label>Police Station:</label>
+                    <input type="text" id="manualPoliceStation" required />
+                  </div>
+                  <div class="form-group">
+                    <label>District:</label>
+                    <input type="text" id="manualDistrict" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>State:</label>
+                    <input type="text" id="manualState" style="display: none" />
+                  </div>
+                  <div class="form-group">
+                    <label>PIN Code:</label>
+                    <div class="digit-input" id="pinCodeInput">
+                      <input
+                        type="text"
+                        class="digit-box"
+                        maxlength="1"
+                        inputmode="numeric"
+                      />
+                      <input
+                        type="text"
+                        class="digit-box"
+                        maxlength="1"
+                        inputmode="numeric"
+                      />
+                      <input
+                        type="text"
+                        class="digit-box"
+                        maxlength="1"
+                        inputmode="numeric"
+                      />
+                      <input
+                        type="text"
+                        class="digit-box"
+                        maxlength="1"
+                        inputmode="numeric"
+                      />
+                      <input
+                        type="text"
+                        class="digit-box"
+                        maxlength="1"
+                        inputmode="numeric"
+                      />
+                      <input
+                        type="text"
+                        class="digit-box"
+                        maxlength="1"
+                        inputmode="numeric"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-secondary"
+            id="addGuardianBtn"
+            style="display: none"
+          >
+            Add Another Guardian
+          </button>
+        </div>
+
+        <button class="btn submit-btn" id="submitBtn">Submit Form</button>
+      </div>
+    </div>
+
+    <!-- Popups -->
+    <div class="popup" id="popup">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <h3 id="popupTitle"></h3>
+        <ul class="popup-list" id="popupList"></ul>
+      </div>
+    </div>
+
+    <div class="popup" id="reviewPopup">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <h3>Review Your Information</h3>
+        <div class="review-content" id="reviewContent"></div>
+        <div style="text-align: center; margin-top: 20px">
+          <button class="btn" id="finalSubmitBtn">Final Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Data structures
+      const classes = ["XI A", "XI B", "XII", "NEET A", "NEET B"];
+      const rooms = {
+        "XI B": ["Room 101", "Room 102", "Room 103", "Room 104", "Room 105"],
+        "XI A": ["Room 201", "Room 202", "Room 203", "Room 204", "Room 205"],
+        XII: ["Room 301", "Room 302", "Room 303", "Room 304", "Room 305"],
+        "NEET A": ["Room 401", "Room 402", "Room 403", "Room 404"],
+        "NEET B": [
+          "Room 501",
+          "Room 502",
+          "Room 503",
+          "Room 504",
+          "Room 505",
+          "Room 601",
+          "Room 602",
+          "Room 603",
+          "Room 604",
+        ],
+      };
+
+      const students = {
+        "XI B": {
+          "Room 101": [
+            { name: "MD AZIZ HOSSAIN", reg: "41451" },
+            { name: "SOHAN TARAFDAR", reg: "70776" },
+            { name: "IMRAN RAHAMAN", reg: "70790" },
+            { name: "NAWAZ MONDAL", reg: "70983" },
+            { name: "MD HAYATULLA", reg: "71062" },
+            { name: "ABU RAIHAN", reg: "70782" },
+            { name: "NAJMUS SADAT", reg: "41061" },
+            { name: "ARIF MONDAL", reg: "70781" },
+            { name: "OWAKIL AHAMED", reg: "70786" },
+            { name: "MANJUR ALAM", reg: "71003" },
+            { name: "MD AAWESH RAZA", reg: "36196" },
+            { name: "ARMAN ISLAM", reg: "45332" },
+          ],
+          "Room 102": [
+            { name: "ISHAD HASSAN", reg: "49614" },
+            { name: "ROHIT HOQUE", reg: "71925" },
+            { name: "RAJJAB ALI", reg: "41354" },
+            { name: "AHMAD", reg: "54800" },
+            { name: "ATIF UDDIN MONDAL", reg: "70808" },
+            { name: "SHAMIM MONDAL", reg: "70840" },
+            { name: "ASRAFUL MIRZA", reg: "70785" },
+            { name: "SOHAIL RANA SARDAR", reg: "35611" },
+            { name: "RUMAN SANI", reg: "54514" },
+            { name: "SAKIL AKHTAR", reg: "56378" },
+            { name: "TAHIR AZIZ", reg: "70952" },
+          ],
+          "Room 103": [
+            { name: "MD RAHMAN HOSSIN", reg: "54535" },
+            { name: "MD MINHAZUDDIN GOLDER", reg: "70886" },
+            { name: "LABIB RAHAMAN", reg: "36553" },
+            { name: "SAYAN SARDAR", reg: "54709" },
+            { name: "ISHAYAT HASAN", reg: "55192" },
+            { name: "ASIM AKTAR", reg: "70868" },
+            { name: "NUR ALAM", reg: "41767" },
+          ],
+          "Room 104": [
+            { name: "SK MD ASHIF", reg: "41034" },
+            { name: "ENAMUL KABIR", reg: "41202" },
+            { name: "MD AKRAM", reg: "45091" },
+            { name: "TANBIR SK", reg: "49216" },
+            { name: "ZAHIN ANAN", reg: "49355" },
+            { name: "TASHMIA MOTIUR RAHAMAN", reg: "54636" },
+            { name: "SK JISHAN UDDIN", reg: "70862" },
+            { name: "SK NAZIB UR RAHAMAN", reg: "41037" },
+            { name: "AARIYAN SHEIK", reg: "49966" },
+            { name: "MD TOWQIR REZA", reg: "49916" },
+            { name: "DILUYAR HOSSAIN ANSARI", reg: "71566" },
+          ],
+          "Room 105": [
+            { name: "TAFHIM TAMAM", reg: "70778" },
+            { name: "MD HASIM AKTAR", reg: "71193" },
+            { name: "HAMID RAJA", reg: "49659" },
+            { name: "MD KASED MONDAL", reg: "70882" },
+            { name: "NAJME ALAM", reg: "70784" },
+            { name: "SAHARUL ISLAM", reg: "70937" },
+            { name: "IJAJ AHAMMED MONDAL", reg: "71053" },
+            { name: "SK NABIDUL HASAN RAJ", reg: "36445" },
+            { name: "FAHIM AL ROSE", reg: "46130" },
+            { name: "NAFEES ALAM MONDAL", reg: "54572" },
+          ],
+        },
+        "XI A": {
+          "Room 201": [
+            { name: "SAYEL HOSSAIN", reg: "35567" },
+            { name: "ARIYAN AHAMED", reg: "41421" },
+            { name: "BABU NASIM REJA", reg: "55633" },
+            { name: "NAYEM REJA MONDAL", reg: "70779" },
+            { name: "MIYARAJ MOLLA", reg: "35143" },
+            { name: "TANZIM ISLAM", reg: "49552" },
+            { name: "SAHIN ALAM", reg: "54527" },
+            { name: "AQEEL ABRAR", reg: "70800" },
+            { name: "MD SOHEL ISLAM", reg: "36073" },
+            { name: "MINHAJ MONDAL", reg: "55056" },
+            { name: "RIYAJ UDDIN DARJEE", reg: "70780" },
+            { name: "MD KHURSHID ALAM", reg: "70933" },
+            { name: "HABIBUR SK", reg: "71088" },
+            { name: "SAMIM AKTHER", reg: "49870" },
+            { name: "SK ABABIL HOQUE", reg: "49888" },
+            { name: "MOHAMMAD ANAS SIDDIQUE", reg: "54892" },
+            { name: "MISBAUL HAQUE", reg: "55650" },
+            { name: "AL MASUM LASKAR", reg: "70819" },
+          ],
+          "Room 202": [
+            { name: "TUHIN HOSSAIN SHAIKH", reg: "51602" },
+            { name: "MD ARIJ AFTAB", reg: "36359" },
+            { name: "SAKIB REJA", reg: "49518" },
+            { name: "SABIR ALAM", reg: "50978" },
+            { name: "TANVIR IQBAL", reg: "54365" },
+            { name: "MD KAMRAN KHAN", reg: "55188" },
+            { name: "MASUM ALI", reg: "35542" },
+            { name: "MD ABDUL SANARUL SK", reg: "41156" },
+            { name: "ASHIK EKBAL", reg: "45648" },
+            { name: "DILDAR SHEIKH", reg: "50221" },
+            { name: "MD ABUL KALAM AZAD", reg: "54468" },
+            { name: "MIR MISBAHUL HOQUE", reg: "70789" },
+            { name: "SUHAN SARDAR", reg: "71040" },
+          ],
+          "Room 203": [
+            { name: "SIYAM FERDOUS", reg: "49178" },
+            { name: "SHAYAR BAIDYA", reg: "70787" },
+            { name: "FAHMID KALAM", reg: "70816" },
+            { name: "ALFARHAD SHEIKH", reg: "70926" },
+            { name: "SAIFUL ISLAM", reg: "36253" },
+            { name: "AKSAR AMANAT ALI", reg: "46276" },
+            { name: "MD MIMHAZ HOSSAIN", reg: "48991" },
+            { name: "NIZAM UDDIN SHEIKH", reg: "49247" },
+            { name: "SAKIB HOSSAIN", reg: "54658" },
+            { name: "MD SAKHAWAT HOSSAIN", reg: "36937" },
+          ],
+          "Room 204": [
+            { name: "SK MAHATAB ALAM", reg: "45251" },
+            { name: "RIYAJ ALAM", reg: "45437" },
+            { name: "RASEL SK", reg: "35407" },
+            { name: "ARIYAN SK", reg: "36254" },
+            { name: "MD RIHAN SAJJAD SK", reg: "41177" },
+            { name: "MOHAMMAD REJA", reg: "44722" },
+            { name: "SK MOINUL ISLAM", reg: "54935" },
+            { name: "MD BULBUL HASAN", reg: "56934" },
+            { name: "MAHAFUJ RAHAMAN", reg: "49280" },
+            { name: "MD ROHIT SEIKH", reg: "49955" },
+            { name: "ASHIF MISTRY", reg: "50102" },
+            { name: "MIR WAZUDDIN", reg: "51140" },
+            { name: "HASIBUR RAHAMAN", reg: "57878" },
+          ],
+          "Room 205": [
+            { name: "ABDUL NAYEEM", reg: "35777" },
+            { name: "MD RABIUL ALAM", reg: "41200" },
+            { name: "MD AFIF SARKAR", reg: "44728" },
+            { name: "SK SAMIRUDDIN", reg: "45477" },
+            { name: "SAHEN RAHAMAN", reg: "70965" },
+            { name: "IMRAN NAJIR", reg: "45486" },
+            { name: "RAIYAN MONDAL", reg: "54780" },
+            { name: "ABU HASNATH LASKAR", reg: "34911" },
+            { name: "MD SAIRUL ALAM", reg: "36354" },
+            { name: "ASFAQUR RAHAMAN", reg: "49703" },
+            { name: "A R WASIM AKTER", reg: "70863" },
+            { name: "SORIFUL MONDAL", reg: "70925" },
+            { name: "AL MAMUN SHAIKH", reg: "70972" },
+          ],
+        },
+        XII: {
+          "Room 301": [
+            { name: "WASIM BISWAS", reg: "30950" },
+            { name: "MD RAJIBUL HOSSAIN", reg: "31514" },
+            { name: "SAHIL SK", reg: "31773" },
+            { name: "MD AAKIQUE", reg: "36362" },
+            { name: "SK JAMIRUDDIN", reg: "36954" },
+            { name: "KASHIF IMRAN HOSSAIN", reg: "41802" },
+            { name: "WASIQUR RAHAMAN", reg: "44237" },
+            { name: "IBRAHIM SK", reg: "44483" },
+            { name: "TANMOY MALLICK", reg: "44674" },
+            { name: "SOUKAT JAHID", reg: "44824" },
+            { name: "AMINUL KABIR", reg: "45106" },
+            { name: "MD SAKIL AHMED ANSARI", reg: "50181" },
+            { name: "ATIK SHIHAB MIDDEY", reg: "63902" },
+            { name: "AMIRUL ALAM", reg: "64121" },
+            { name: "SK TOUFIK UDDIN", reg: "64344" },
+          ],
+          "Room 302": [
+            { name: "KAZI MUSAD ALAM", reg: "30872" },
+            { name: "MD IKBAL KARIM", reg: "31429" },
+            { name: "MOBARAK KHAN", reg: "35669" },
+            { name: "HABIBUR RAHAMAN", reg: "36902" },
+            { name: "SK AMAN RAJ", reg: "44368" },
+            { name: "MD ASIF", reg: "44580" },
+            { name: "PARVEJ MALLICK", reg: "49208" },
+            { name: "MD FARHAT HOSSAIN", reg: "49648" },
+            { name: "ADIL SANFUI", reg: "63873" },
+            { name: "SAYAN RAHAMAN", reg: "63882" },
+            { name: "MD WAJAHAT ALI", reg: "63921" },
+          ],
+          "Room 304": [
+            { name: "BELAL HOSEN KHAN", reg: "31179" },
+            { name: "IMRAN HOSSAIN", reg: "31714" },
+            { name: "AJWAD AS SABUR", reg: "31761" },
+            { name: "RAIHAN AHAMED", reg: "39688" },
+            { name: "ABTAB HOSSAIN", reg: "39804" },
+            { name: "FARHAN RAHAMAN", reg: "40457" },
+            { name: "ROBIUL ISLAM", reg: "49557" },
+            { name: "ABDUL WAHID MONDAL", reg: "63878" },
+            { name: "JISANUR ISLAM", reg: "63885" },
+            { name: "RUBEL MIAH", reg: "63901" },
+            { name: "MD ISHTIAQUE KHAN", reg: "63956" },
+            { name: "MD ABDULLAH AHSAN LASKAR", reg: "64037" },
+          ],
+          "Room 305": [
+            { name: "SAKIL SK", reg: "30893" },
+            { name: "SARFARAJ SK", reg: "32018" },
+            { name: "NIJAMUDDIN AHAMED", reg: "32586" },
+            { name: "MD ALAUDDIN SK", reg: "32609" },
+            { name: "SAMIUL RAHAMAN", reg: "36537" },
+            { name: "MD SHAHIDULLA", reg: "44457" },
+            { name: "TAHIDUL ISLAM", reg: "45212" },
+            { name: "KISMATULLAH", reg: "49563" },
+            { name: "SWAPNIL KHAN", reg: "49719" },
+            { name: "RAHAT SARKAR", reg: "49729" },
+            { name: "ANISH ALAM", reg: "63890" },
+            { name: "AFRIDI SK", reg: "63891" },
+            { name: "MD MIZANUR RAHMAN", reg: "64155" },
+          ],
+        },
+        "NEET A": {
+          "Room 401": [
+            { name: "RAHIK HASSAN MONDAL", reg: "26381" },
+            { name: "MD PARVAGE MOSARAF", reg: "27243" },
+            { name: "MIRJA RAJ", reg: "30499" },
+            { name: "SAYAN SK", reg: "35378" },
+            { name: "ASHADUL SK", reg: "36308" },
+            { name: "SK RAJIBUL HOSSAIN", reg: "39886" },
+            { name: "MD IBRAHIM MUNSI", reg: "40046" },
+            { name: "NISHAN KHAN", reg: "44398" },
+            { name: "MOJAHIDUL ISLAM", reg: "44754" },
+            { name: "TALHA HALDER", reg: "45006" },
+            { name: "Md Wasim Sk", reg: "47015" },
+            { name: "REHAN LASKAR", reg: "47191" },
+            { name: "MUNSHI TOUKIR JIYA", reg: "47248" },
+            { name: "SAHARIYAT BISWAS", reg: "58105" },
+            { name: "SAYED MURSALIN RAHAMAN", reg: "58164" },
+            { name: "REJOYAN ALAM", reg: "58290" },
+            { name: "REHAN AKTAR", reg: "58419" },
+            { name: "Najmul Hossen Chaprashi", reg: "72112" },
+          ],
+          "Room 402": [
+            { name: "NABID UL FAHAD", reg: "28286" },
+            { name: "MOHAIMENUL ISLAM", reg: "28333" },
+            { name: "SK SANWAZZ HOSSAIN MONDAL", reg: "35978" },
+            { name: "MD RIYAMIN ALI", reg: "36338" },
+            { name: "RAIYAN HOQUE", reg: "39774" },
+            { name: "MD ZUBAYER", reg: "41564" },
+            { name: "ROUSAN TANVIR ISLAM", reg: "45269" },
+            { name: "MD SAHIN AKTAR", reg: "58045" },
+            { name: "RIHAB ARSALAN", reg: "58265" },
+            { name: "Sk Md Nasim Aktar", reg: "72144" },
+            { name: "DANISH TANVIR SARDAR", reg: "72373" },
+          ],
+          "Room 403": [
+            { name: "MISBAHUR RAHAMAN MOLLAH", reg: "27120" },
+            { name: "Labib Muaz Abidin", reg: "35512" },
+            { name: "IMDADUL ISLAM", reg: "35681" },
+            { name: "MD ARIF HOSSAIN", reg: "37081" },
+            { name: "MANSUR ALAM", reg: "42461" },
+            { name: "MD ARBAZ HOSSAIN", reg: "58003" },
+            { name: "SAFIKUL ALAM", reg: "58015" },
+            { name: "KIFAYAT CHOWDHURY", reg: "58087" },
+            { name: "MD AFSAN", reg: "58228" },
+            { name: "Md Nayel", reg: "58278" },
+            { name: "Seikh Shyfur Rahaman", reg: "72124" },
+          ],
+          "Room 404": [
+            { name: "SALMAN HOSSAIN", reg: "26820" },
+            { name: "ABDUL KAIYUM SHAIKH", reg: "28452" },
+            { name: "SIRAJUDDIN SEKH", reg: "30856" },
+            { name: "RIYAJUL ISLAM", reg: "39684" },
+            { name: "RANA MONDAL", reg: "39745" },
+            { name: "ABDUL IDBAR SK", reg: "40319" },
+            { name: "KHONDAKAR NUR AMIN", reg: "44188" },
+            { name: "GULAM GAWS", reg: "44219" },
+            { name: "MD INTEKHAB ALAM", reg: "44539" },
+            { name: "SK TEHSIN ALAM", reg: "58095" },
+            { name: "SAMIUL AKTAR", reg: "58259" },
+            { name: "Riyaj Sk", reg: "72083" },
+            { name: "Md Asfak Hossain", reg: "72086" },
+          ],
+        },
+        "NEET B": {
+          "Room 501": [
+            { name: "Golam Masum", reg: "47884" },
+            { name: "Sahajad Ali", reg: "47958" },
+            { name: "Md Toufik Kabir", reg: "27242" },
+            { name: "MEHEBUB ALAM", reg: "28138" },
+            { name: "Ashik Mohammad Molla", reg: "28430" },
+            { name: "Sk Arman Islam", reg: "32066" },
+            { name: "MIR ARYAN", reg: "32685" },
+            { name: "Sahanewaje Hossain", reg: "35522" },
+            { name: "SAKIB SAIRIN KHAN", reg: "43398" },
+            { name: "Sk Sahenawaz", reg: "47883" },
+            { name: "Ashiq Ikbal", reg: "51717" },
+            { name: "Md Shamim", reg: "53292" },
+            { name: "Reaj Hassan", reg: "72167" },
+            { name: "Imtiaz Reza", reg: "72186" },
+            { name: "ASHRAF HOSSAIN", reg: "72255" },
+          ],
+          "Room 502": [
+            { name: "Hashir Mondal", reg: "31131" },
+            { name: "Raihan Reza", reg: "18826" },
+            { name: "ARYAN LASKAR", reg: "18475" },
+            { name: "Nasrul Sk", reg: "19263" },
+            { name: "Atabur Rahaman", reg: "22245" },
+            { name: "Ripan Ahamed Mollah", reg: "31108" },
+            { name: "Ammar ajmal hakim", reg: "53001" },
+            { name: "GOUSE ALAM", reg: "72199" },
+            { name: "NAFIS WADUD MOLLA", reg: "72318" },
+          ],
+          "Room 503": [
+            { name: "Md Shakil Bandar", reg: "18467" },
+            { name: "Sk Asif Rahaman", reg: "72071" },
+            { name: "Sohel Rana", reg: "16366" },
+            { name: "Toufik Iqbal", reg: "36404" },
+            { name: "Md Arman Ahamed", reg: "47102" },
+            { name: "Md Roman Ahamed", reg: "47286" },
+            { name: "Md Nazmul Alam", reg: "47689" },
+            { name: "Manowar Hossain", reg: "48262" },
+            { name: "Abu Talha", reg: "52599" },
+            { name: "SHOAIB ISLAM", reg: "72315" },
+            { name: "MEHEDI HOSSAIN", reg: "72322" },
+          ],
+          "Room 504": [
+            { name: "IFTIKAR MANDAL", reg: "47647" },
+            { name: "Mirja Najmus Sahadat", reg: "65168" },
+            { name: "Suraj Alam", reg: "52315" },
+            { name: "Sahin Aktar", reg: "30587" },
+            { name: "Md Najrul Islam Bulbul", reg: "28271" },
+            { name: "Saroyan Raja", reg: "28389" },
+            { name: "SANOWAR NAIYA", reg: "51978" },
+            { name: "SAGAR HOSSAIN", reg: "52417" },
+            { name: "MD FARHAD", reg: "53232" },
+            { name: "Safwaan Bin Abdul Haque", reg: "72146" },
+            { name: "Sajid Uddin Laskar", reg: "72166" },
+          ],
+          "Room 505": [
+            { name: "Wasim Aktar", reg: "59095" },
+            { name: "Tanbir Alam", reg: "72150" },
+            { name: "Nabedul Hasan Rana", reg: "35523" },
+            { name: "Ejajul Ahammed", reg: "65450" },
+            { name: "Sekh Prateek Hossain", reg: "72192" },
+            { name: "Md Jahir Islam", reg: "19922" },
+            { name: "Sahim Ikbal", reg: "36136" },
+            { name: "TARIK AZIZ", reg: "39662" },
+            { name: "Jahid Hasan", reg: "42089" },
+            { name: "NAHID BISWAS", reg: "72252" },
+          ],
+          "Room 601": [
+            { name: "Mehebub Alam", reg: "72088" },
+            { name: "S M Meheraj", reg: "26955" },
+            { name: "Zubair Alam", reg: "27347" },
+            { name: "Md Minhaj", reg: "52215" },
+            { name: "Sk Ashraful Alam", reg: "65088" },
+            { name: "MD SAHEL RANA", reg: "72376" },
+            { name: "Iftikar Rahaman", reg: "23546" },
+            { name: "Mujahid Rahaman Molla", reg: "27023" },
+            { name: "OMAR FARUK LASKAR", reg: "72365" },
+            { name: "Farhan Hossain", reg: "23559" },
+            { name: "Md Imtiaz Ahamed", reg: "32820" },
+            { name: "Md Iyafes Ahmed Molla", reg: "35021" },
+            { name: "NAIYAR TANVEER", reg: "53061" },
+            { name: "Raunaq Sheikh", reg: "72134" },
+            { name: "Yeasir Rahaman", reg: "72136" },
+            { name: "Akhtar Alam", reg: "19439" },
+            { name: "Sabbir Ahamed", reg: "32056" },
+            { name: "Md Arifuddin Sk", reg: "51935" },
+            { name: "Md Jakiul Hossain", reg: "52117" },
+            { name: "HUMAYUN KABIR", reg: "72313" },
+          ],
+          "Room 602": [
+            { name: "Mustaque Ahmed", reg: "72154" },
+            { name: "Hasanujjaman", reg: "42130" },
+            { name: "Iftikar Alom", reg: "53227" },
+            { name: "Mobarak Hussain", reg: "36325" },
+            { name: "Armaan Dafadar", reg: "42132" },
+            { name: "Sk Samiul Islam", reg: "72229" },
+            { name: "Shah Kabir Mallick", reg: "65067" },
+            { name: "Maruf Shihab", reg: "27473" },
+            { name: "Asim Akram", reg: "28093" },
+            { name: "Naim Aktar", reg: "30920" },
+            { name: "ASIF ALAM", reg: "42068" },
+            { name: "Shekh Tanij", reg: "47982" },
+          ],
+          "Room 603": [
+            { name: "Alamgir Alam", reg: "51630" },
+            { name: "Kamar Uz Zaman Molla", reg: "59440" },
+            { name: "Md Masadul Hasan", reg: "32540" },
+            { name: "Parvej Akhtar", reg: "19537" },
+            { name: "Arif Nawaz Islam", reg: "59446" },
+            { name: "Oyayesh Mirza", reg: "22641" },
+            { name: "Soheb Aktar", reg: "59186" },
+            { name: "Noor Alam", reg: "65094" },
+            { name: "Abdul Al Mamun", reg: "65293" },
+          ],
+          "Room 604": [
+            { name: "SK MUNTASIR MONDAL", reg: "19460" },
+            { name: "Md Salihin Sk", reg: "35636" },
+            { name: "Wasikul Sk", reg: "47805" },
+            { name: "Intekhab Alam", reg: "48209" },
+            { name: "Mahammed Aiuab", reg: "52851" },
+            { name: "Sakil Iqbal", reg: "28550" },
+            { name: "Sk Mohammad Nasser Hussain", reg: "38062" },
+            { name: "Saikat Shaikh", reg: "47467" },
+            { name: "Md Soif Ali", reg: "51847" },
+            { name: "Abir Biswas", reg: "52233" },
+            { name: "MD FARHAN ISLAM", reg: "72314" },
+          ],
+        },
+      };
+
+      const relationships = [
+        "Father",
+        "Mother",
+        "Brother",
+        "Sister",
+        "Uncle",
+        "Aunt",
+        "Grandfather",
+        "Grandmother",
+        "Others",
+      ];
+      const states = ["West Bengal", "Outside West Bengal"];
+      const districts = [
+        "Kolkata",
+        "Alipurduar",
+        "Bankura",
+        "Bardhaman",
+        "Birbhum",
+        "Cooch Behar",
+        "Dakshin Dinajpur",
+        "Darjeeling",
+        "Hooghly",
+        "Howrah",
+        "Jalpaiguri",
+        "Jhargram",
+        "Kalimpong",
+        "Malda",
+        "Medinipur East",
+        "Medinipur West",
+        "Murshidabad",
+        "Nadia",
+        "North 24 Parganas",
+        "Paschim Bardhaman",
+        "Purba Bardhaman",
+        "Purulia",
+        "South 24 Parganas",
+        "Uttar Dinajpur",
+      ];
+
+      const policeStations = {
+        Kolkata: [
+          "Lalbazar",
+          "Kalighat",
+          "Gariahat",
+          "Ballygunge",
+          "Park Street",
+          "Jorasanko",
+          "Burrabazar",
+          "Amherst Street",
+        ],
+        Howrah: [
+          "Howrah City",
+          "Shibpur",
+          "Golabari",
+          "Liluah",
+          "Belur",
+          "Bally",
+          "Uttarpara",
+          "Serampore",
+        ],
+        "North 24 Parganas": [
+          "Barasat",
+          "Basirhat",
+          "Bidhannagar",
+          "Barrackpur",
+          "Titagarh",
+          "Naihati",
+          "Panihati",
+          "Dum Dum",
+        ],
+        "South 24 Parganas": [
+          "Alipore",
+          "Jadavpur",
+          "Sonarpur",
+          "Baruipur",
+          "Canning",
+          "Diamond Harbour",
+          "Kakdwip",
+          "Kultali",
+        ],
+        Hooghly: [
+          "Chinsurah",
+          "Chandannagar",
+          "Rishra",
+          "Bhadreswar",
+          "Konnagar",
+          "Uttarpara",
+          "Serampore",
+          "Arambagh",
+        ],
+        Nadia: [
+          "Krishnanagar",
+          "Ranaghat",
+          "Kalyani",
+          "Nabadwip",
+          "Santipur",
+          "Chakdah",
+          "Haringhata",
+          "Tehatta",
+          "Thanar Para",
+        ],
+        Murshidabad: [
+          "Berhampore",
+          "Kandi",
+          "Jangipur",
+          "Lalbagh",
+          "Bhagwangola",
+          "Raghunathganj",
+          "Suti",
+          "Farakka",
+        ],
+        Birbhum: [
+          "Suri",
+          "Bolpur",
+          "Rampurhat",
+          "Dubrajpur",
+          "Sainthia",
+          "Nalhati",
+          "Mayureswar",
+          "Murarai",
+        ],
+        "Purba Bardhaman": [
+          "Burdwan",
+          "Asansol",
+          "Durgapur",
+          "Raniganj",
+          "Jamuria",
+          "Andal",
+          "Salanpur",
+          "Ausgram",
+        ],
+        "Paschim Bardhaman": [
+          "Asansol",
+          "Durgapur",
+          "Raniganj",
+          "Jamuria",
+          "Andal",
+          "Barabani",
+          "Kulti",
+          "Burnpur",
+        ],
+        Darjeeling: [
+          "Darjeeling",
+          "Kurseong",
+          "Kalimpong",
+          "Siliguri",
+          "Matigara",
+          "Naxalbari",
+          "Khoribari",
+          "Phansidewa",
+        ],
+        Jalpaiguri: [
+          "Jalpaiguri",
+          "Mal",
+          "Matiali",
+          "Rajganj",
+          "Mainaguri",
+          "Dhupguri",
+          "Kranti",
+          "Nagrakata",
+        ],
+        "Cooch Behar": [
+          "Cooch Behar",
+          "Tufanganj",
+          "Mathabhanga",
+          "Mekhliganj",
+          "Haldibari",
+          "Sitai",
+          "Dinhata",
+          "Sitalkuchi",
+        ],
+        Alipurduar: [
+          "Alipurduar",
+          "Birpara",
+          "Kalchini",
+          "Kumargram",
+          "Madarihat",
+          "Falakata",
+          "Jaigaon",
+          "Hasimara",
+        ],
+        Malda: [
+          "Malda",
+          "English Bazar",
+          "Chanchal",
+          "Ratua",
+          "Manikchak",
+          "Kaliachak",
+          "Habibpur",
+          "Bamangola",
+        ],
+        Bankura: [
+          "Bankura",
+          "Bishnupur",
+          "Khatra",
+          "Taldangra",
+          "Saltora",
+          "Chhatna",
+          "Gangajalghati",
+          "Mejhia",
+        ],
+        Purulia: [
+          "Purulia",
+          "Raghunathpur",
+          "Jhalda",
+          "Arsha",
+          "Baghmundi",
+          "Balarampur",
+          "Bundwan",
+          "Hura",
+        ],
+        "Purba Medinipur": [
+          "Tamluk",
+          "Contai",
+          "Egra",
+          "Haldia",
+          "Nandigram",
+          "Mahisadal",
+          "Sutahata",
+          "Khejuri",
+        ],
+        "Paschim Medinipur": [
+          "Midnapore",
+          "Kharagpur",
+          "Jhargram",
+          "Gopiballavpur",
+          "Belda",
+          "Ghatal",
+          "Chandrakona",
+          "Garbeta",
+        ],
+        Jhargram: [
+          "Jhargram",
+          "Gopiballavpur",
+          "Jamboni",
+          "Nayagram",
+          "Binpur",
+          "Sankrail",
+          "Lalgarh",
+          "Belpahari",
+        ],
+        Kalimpong: [
+          "Kalimpong",
+          "Gorubathan",
+          "Lava",
+          "Pedong",
+          "Samabeong",
+          "Delo",
+          "Algarah",
+          "Rishi",
+        ],
+        "Uttar Dinajpur": [
+          "Raiganj",
+          "Islampur",
+          "Chopra",
+          "Goalpokhar",
+          "Itahar",
+          "Hemtabad",
+          "Kaliaganj",
+          "Chakulia",
+        ],
+        "Dakshin Dinajpur": [
+          "Balurghat",
+          "Gangarampur",
+          "Tapan",
+          "Bansihari",
+          "Harirampur",
+          "Kumarganj",
+          "Kushmandi",
+          "Hilli",
+        ],
+      };
+
+      // State management
+      let selectedClass = "";
+      let selectedRoom = "";
+      let selectedStudent = "";
+      let selectedRelationship = "";
+      let selectedState = "";
+      let selectedDistrict = "";
+      let selectedPoliceStation = "";
+      let guardianCount = 1;
+      let additionalGuardians = [];
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeEventListeners();
+        setupDigitInputs();
+        setupAutoScroll();
+      });
+
+      function initializeEventListeners() {
+        // Class selection
+        document
+          .getElementById("selectClassBtn")
+          .addEventListener("click", () => {
+            showPopup("Select Class", classes, selectClass);
+          });
+
+        // Room selection
+        document
+          .getElementById("selectRoomBtn")
+          .addEventListener("click", () => {
+            const roomList = [...rooms[selectedClass], "রুম নম্বর জানিনা"];
+            showPopup("Select Room", roomList, selectRoom);
+          });
+
+        // Student selection
+        document
+          .getElementById("selectStudentBtn")
+          .addEventListener("click", () => {
+            if (selectedRoom === "রুম নম্বর জানিনা") {
+              showManualStudentEntry();
+            } else {
+              const studentList =
+                students[selectedClass] && students[selectedClass][selectedRoom]
+                  ? students[selectedClass][selectedRoom].map(
+                      (s) => `${s.name} (${s.reg})`
+                    )
+                  : [];
+              showPopup("Select Student", studentList, selectStudent);
+            }
+          });
+
+        // Relationship selection
+        document
+          .getElementById("selectRelationshipBtn")
+          .addEventListener("click", () => {
+            showPopup("Select Relationship", relationships, selectRelationship);
+          });
+
+        // State selection
+        document
+          .getElementById("selectStateBtn")
+          .addEventListener("click", () => {
+            showPopup("Select State", states, selectState);
+          });
+
+        // District selection
+        document
+          .getElementById("selectDistrictBtn")
+          .addEventListener("click", () => {
+            showPopup("Select District", districts, selectDistrict);
+          });
+
+        // Police Station selection
+        document
+          .getElementById("selectPoliceStationBtn")
+          .addEventListener("click", () => {
+            const stations = policeStations[selectedDistrict] || [];
+            showPopup("Select Police Station", stations, selectPoliceStation);
+          });
+
+        // Add guardian
+        document
+          .getElementById("addGuardianBtn")
+          .addEventListener("click", addGuardian);
+
+        // Submit form
+        document
+          .getElementById("submitBtn")
+          .addEventListener("click", submitForm);
+
+        // Final submit
+        document
+          .getElementById("finalSubmitBtn")
+          .addEventListener("click", finalSubmit);
+
+        // Popup close
+        document.querySelectorAll(".popup-close").forEach((close) => {
+          close.addEventListener("click", () => {
+            document.querySelectorAll(".popup").forEach((popup) => {
+              popup.style.display = "none";
+            });
+          });
+        });
+
+        // Student search
+        document
+          .getElementById("studentSearch")
+          .addEventListener("input", handleStudentSearch);
+      }
+
+      function setupDigitInputs() {
+        // Phone number input
+        const phoneInputs = document.querySelectorAll("#phoneInput .digit-box");
+        setupDigitNavigation(phoneInputs);
+
+        // Registration number input
+        const regInputs = document.querySelectorAll(
+          "#regNumberInput .digit-box"
+        );
+        setupDigitNavigation(regInputs);
+
+        // PIN code input
+        const pinInputs = document.querySelectorAll("#pinCodeInput .digit-box");
+        setupDigitNavigation(pinInputs);
+      }
+
+      function setupDigitNavigation(inputs) {
+        inputs.forEach((input, index) => {
+          input.addEventListener("input", (e) => {
+            const value = e.target.value.replace(/[^0-9]/g, "");
+            e.target.value = value;
+
+            if (value && index < inputs.length - 1) {
+              inputs[index + 1].focus();
+            }
+          });
+
+          input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && !e.target.value && index > 0) {
+              inputs[index - 1].focus();
+            }
+          });
+        });
+      }
+
+      function setupAutoScroll() {
+        const inputs = document.querySelectorAll("input, button, select");
+        inputs.forEach((input) => {
+          input.addEventListener("focus", () => {
+            setTimeout(() => {
+              input.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 100);
+          });
+        });
+      }
+
+      function showPopup(title, items, callback) {
+        const popup = document.getElementById("popup");
+        const popupTitle = document.getElementById("popupTitle");
+        const popupList = document.getElementById("popupList");
+
+        popupTitle.textContent = title;
+        popupList.innerHTML = "";
+
+        items.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.className = "popup-item";
+          li.textContent = item;
+          li.style.animationDelay = `${index * 0.1}s`;
+          li.addEventListener("click", () => {
+            callback(item);
+            popup.style.display = "none";
+          });
+          popupList.appendChild(li);
+        });
+
+        popup.style.display = "flex";
+      }
+
+      function selectClass(className) {
+        selectedClass = className;
+        document.getElementById(
+          "selectedClass"
+        ).textContent = `Selected: ${className}`;
+        document.getElementById("selectRoomBtn").disabled = false;
+        resetRoomSelection();
+      }
+
+      function selectRoom(roomName) {
+        selectedRoom = roomName;
+        document.getElementById(
+          "selectedRoom"
+        ).textContent = `Selected: ${roomName}`;
+        document.getElementById("selectStudentBtn").disabled = false;
+        resetStudentSelection();
+      }
+
+      function selectStudent(studentInfo) {
+        selectedStudent = studentInfo;
+        document.getElementById(
+          "selectedStudent"
+        ).textContent = `Selected: ${studentInfo}`;
+        document.getElementById("manualStudentEntry").style.display = "none";
+      }
+
+      function showManualStudentEntry() {
+        document.getElementById("manualStudentEntry").style.display = "block";
+      }
+
+      function handleStudentSearch(e) {
+        const query = e.target.value.toLowerCase();
+        const suggestions = document.getElementById("searchSuggestions");
+
+        if (query.length < 2) {
+          suggestions.style.display = "none";
+          return;
+        }
+
+        const allStudents = [];
+
+        Object.entries(students).forEach(([className, rooms]) => {
+          Object.entries(rooms).forEach(([roomName, studentList]) => {
+            studentList.forEach((student) => {
+              allStudents.push({
+                ...student,
+                className,
+                roomName,
+              });
+            });
+          });
+        });
+
+        const filtered = allStudents.filter((student) =>
+          student.name.toLowerCase().includes(query)
+        );
+
+        suggestions.innerHTML = "";
+
+        if (filtered.length > 0) {
+          filtered.forEach((student) => {
+            const div = document.createElement("div");
+            div.className = "suggestion-item";
+            div.textContent = `${student.name} (${student.reg}) - ${student.className}, ${student.roomName}`;
+            div.addEventListener("click", () => {
+              // Set selected student
+              selectedStudent = `${student.name} (${student.reg})`;
+              document.getElementById("studentSearch").value = student.name;
+
+              // Auto-fill reg number
+              const regInputs = document.querySelectorAll(
+                "#regNumberInput .digit-box"
+              );
+              const regNumber = student.reg.padStart(6, "0");
+              regInputs.forEach((input, index) => {
+                input.value = regNumber[index] || "";
+              });
+
+              // ✅ Auto-set class
+              selectedClass = student.className;
+              document.getElementById(
+                "selectedClass"
+              ).textContent = `Selected: ${student.className}`;
+              document.getElementById("selectRoomBtn").disabled = false;
+
+              // ✅ Auto-set room
+              selectedRoom = student.roomName;
+              document.getElementById(
+                "selectedRoom"
+              ).textContent = `Selected: ${student.roomName}`;
+              document.getElementById("selectStudentBtn").disabled = false;
+
+              suggestions.style.display = "none";
+            });
+            suggestions.appendChild(div);
+          });
+          suggestions.style.display = "block";
+        } else {
+          suggestions.style.display = "none";
+        }
+      }
+
+      function selectRelationship(relationship) {
+        selectedRelationship = relationship;
+        document.getElementById(
+          "selectedRelationship"
+        ).textContent = `Selected: ${relationship}`;
+
+        const customInput = document.getElementById("customRelationship");
+        if (relationship === "Others") {
+          customInput.style.display = "block";
+          customInput.required = true;
+        } else {
+          customInput.style.display = "none";
+          customInput.required = false;
+          customInput.value = "";
+        }
+      }
+
+      function selectState(state) {
+        selectedState = state;
+        document.getElementById(
+          "selectedState"
+        ).textContent = `Selected: ${state}`;
+
+        const wbFields = document.getElementById("wbFields");
+        const addressFields = document.getElementById("addressFields");
+        const manualAddressFields = document.getElementById(
+          "manualAddressFields"
+        );
+        const manualState = document.getElementById("manualState");
+
+        if (state === "West Bengal") {
+          wbFields.style.display = "block";
+          manualAddressFields.style.display = "none";
+          manualState.style.display = "none";
+          document.getElementById("selectDistrictBtn").disabled = false;
+        } else {
+          wbFields.style.display = "none";
+          manualAddressFields.style.display = "block";
+          manualState.style.display = "block";
+          manualState.required = true;
+        }
+
+        addressFields.style.display = "block";
+        document.getElementById("addGuardianBtn").style.display = "block";
+      }
+
+      function selectDistrict(district) {
+        selectedDistrict = district;
+        document.getElementById(
+          "selectedDistrict"
+        ).textContent = `Selected: ${district}`;
+        document.getElementById("selectPoliceStationBtn").disabled = false;
+      }
+
+      function selectPoliceStation(station) {
+        selectedPoliceStation = station;
+        document.getElementById(
+          "selectedPoliceStation"
+        ).textContent = `Selected: ${station}`;
+      }
+
+      function addGuardian() {
+        guardianCount++;
+        const guardianContainer = document.getElementById("guardianContainer");
+
+        const guardianCard = document.createElement("div");
+        guardianCard.className = "guardian-card";
+        guardianCard.id = `guardian${guardianCount}`;
+
+        guardianCard.innerHTML = `
+                <button class="remove-guardian" onclick="removeGuardian(${guardianCount})">×</button>
+                <h3>Additional Guardian ${guardianCount - 1}</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Guardian Name:</label>
+                        <input type="text" id="guardianName${guardianCount}" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number:</label>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" class="flag-icon">
+                        <div class="digit-input phone" id="phoneInput${guardianCount}">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                            <input type="text" class="digit-box" maxlength="1" inputmode="numeric">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Relationship:</label>
+                        <select id="relationship${guardianCount}" required>
+                            <option value="">Select Relationship</option>
+                            <option value="Father">Father</option>
+                            <option value="Mother">Mother</option>
+                            <option value="Brother">Brother</option>
+                            <option value="Sister">Sister</option>
+                            <option value="Uncle">Uncle</option>
+                            <option value="Aunt">Aunt</option>
+                            <option value="Grandfather">Grandfather</option>
+                            <option value="Grandmother">Grandmother</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <input type="text" id="customRelationship${guardianCount}" placeholder="Enter relationship" style="display: none; margin-top: 10px;">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Address:</label>
+                        <input type="text" id="address${guardianCount}" placeholder="Enter full address" required>
+                    </div>
+                </div>
+            `;
+
+        guardianContainer.appendChild(guardianCard);
+
+        // Setup digit navigation for new phone input
+        const newPhoneInputs = document.querySelectorAll(
+          `#phoneInput${guardianCount} .digit-box`
+        );
+        setupDigitNavigation(newPhoneInputs);
+
+        // Setup relationship change handler
+        document
+          .getElementById(`relationship${guardianCount}`)
+          .addEventListener("change", function (e) {
+            const customInput = document.getElementById(
+              `customRelationship${guardianCount}`
+            );
+            if (e.target.value === "Others") {
+              customInput.style.display = "block";
+              customInput.required = true;
+            } else {
+              customInput.style.display = "none";
+              customInput.required = false;
+              customInput.value = "";
+            }
+          });
+
+        guardianCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function removeGuardian(id) {
+        const guardianCard = document.getElementById(`guardian${id}`);
+        if (guardianCard) {
+          guardianCard.remove();
+        }
+      }
+
+      function resetRoomSelection() {
+        selectedRoom = "";
+        document.getElementById("selectedRoom").textContent = "";
+        document.getElementById("selectStudentBtn").disabled = true;
+        resetStudentSelection();
+      }
+
+      function resetStudentSelection() {
+        selectedStudent = "";
+        document.getElementById("selectedStudent").textContent = "";
+        document.getElementById("manualStudentEntry").style.display = "none";
+      }
+
+      function getDigitValue(containerId) {
+        const inputs = document.querySelectorAll(`#${containerId} .digit-box`);
+        return Array.from(inputs)
+          .map((input) => input.value)
+          .join("");
+      }
+
+      function validateForm() {
+        const errors = [];
+
+        if (!selectedClass) errors.push("Please select a class");
+        if (!selectedRoom) errors.push("Please select a room");
+        if (
+          !selectedStudent &&
+          !document.getElementById("studentSearch").value
+        ) {
+          errors.push("Please select or enter student information");
+        }
+
+        const guardianName = document.getElementById("guardianName").value;
+        if (!guardianName) errors.push("Please enter guardian name");
+
+        const phoneNumber = getDigitValue("phoneInput");
+        if (phoneNumber.length !== 10)
+          errors.push("Please enter a valid 10-digit phone number");
+
+        if (!selectedRelationship) errors.push("Please select relationship");
+        if (
+          selectedRelationship === "Others" &&
+          !document.getElementById("customRelationship").value
+        ) {
+          errors.push("Please specify the relationship");
+        }
+
+        if (!selectedState) errors.push("Please select state");
+
+        if (selectedState === "West Bengal") {
+          if (!selectedDistrict) errors.push("Please select district");
+          if (!selectedPoliceStation)
+            errors.push("Please select police station");
+        }
+
+        const villageCity = document.getElementById("villageCity").value;
+        const postOffice = document.getElementById("postOffice").value;
+        const pinCode = getDigitValue("pinCodeInput");
+
+        if (!villageCity) errors.push("Please enter village/city");
+        if (!postOffice) errors.push("Please enter post office");
+        if (pinCode.length !== 6)
+          errors.push("Please enter a valid 6-digit PIN code");
+
+        return errors;
+      }
+
+      function submitForm() {
+        const errors = validateForm();
+
+        if (errors.length > 0) {
+          alert("Please fix the following errors:\n" + errors.join("\n"));
+          return;
+        }
+
+        showReview();
+      }
+
+      function showReview() {
+        const reviewContent = document.getElementById("reviewContent");
+
+        // Student Information
+        let studentInfo =
+          selectedStudent || document.getElementById("studentSearch").value;
+        if (
+          !selectedStudent &&
+          document.getElementById("studentSearch").value
+        ) {
+          const regNumber = getDigitValue("regNumberInput");
+          studentInfo = `${
+            document.getElementById("studentSearch").value
+          } (${regNumber})`;
+        }
+
+        // Main Guardian Information
+        const guardianName = document.getElementById("guardianName").value;
+        const phoneNumber = getDigitValue("phoneInput");
+        const relationship =
+          selectedRelationship === "Others"
+            ? document.getElementById("customRelationship").value
+            : selectedRelationship;
+
+        const villageCity = document.getElementById("villageCity").value;
+        const postOffice = document.getElementById("postOffice").value;
+        const pinCode = getDigitValue("pinCodeInput");
+
+        let address = `${villageCity}, ${postOffice}`;
+        if (selectedState === "West Bengal") {
+          address += `, ${selectedPoliceStation}, ${selectedDistrict}, West Bengal`;
+        } else {
+          const manualPoliceStation = document.getElementById(
+            "manualPoliceStation"
+          ).value;
+          const manualDistrict =
+            document.getElementById("manualDistrict").value;
+          const manualState = document.getElementById("manualState").value;
+          address += `, ${manualPoliceStation}, ${manualDistrict}, ${manualState}`;
+        }
+        address += ` - ${pinCode}`;
+
+        let reviewHTML = `
+                <div class="review-section">
+                    <h4>Student Information</h4>
+                    <p><strong>Class:</strong> ${selectedClass}</p>
+                    <p><strong>Room:</strong> ${selectedRoom}</p>
+                    <p><strong>Student:</strong> ${studentInfo}</p>
+                </div>
+                
+                <div class="review-section">
+                    <h4>Main Guardian Information</h4>
+                    <p><strong>Name:</strong> ${guardianName}</p>
+                    <p><strong>Phone:</strong> +91 ${phoneNumber}</p>
+                    <p><strong>Relationship:</strong> ${relationship}</p>
+                    <p><strong>Address:</strong> ${address}</p>
+                </div>
+            `;
+
+        // Additional Guardians
+        const additionalGuardians = [];
+        for (let i = 2; i <= guardianCount; i++) {
+          const guardianCard = document.getElementById(`guardian${i}`);
+          if (guardianCard) {
+            const name = document.getElementById(`guardianName${i}`).value;
+            const phone = getDigitValue(`phoneInput${i}`);
+            const rel = document.getElementById(`relationship${i}`).value;
+            const customRel = document.getElementById(
+              `customRelationship${i}`
+            ).value;
+            const addr = document.getElementById(`address${i}`).value;
+
+            const finalRel = rel === "Others" ? customRel : rel;
+
+            additionalGuardians.push({
+              name,
+              phone,
+              relationship: finalRel,
+              address: addr,
+            });
+          }
+        }
+
+        if (additionalGuardians.length > 0) {
+          reviewHTML +=
+            '<div class="review-section"><h4>Additional Guardians</h4>';
+          additionalGuardians.forEach((guardian, index) => {
+            reviewHTML += `
+                        <div style="margin-bottom: 15px; padding: 10px; background: #f0f0f0; border-radius: 5px;">
+                            <p><strong>Guardian ${index + 1}:</strong> ${
+              guardian.name
+            }</p>
+                            <p><strong>Phone:</strong> +91 ${guardian.phone}</p>
+                            <p><strong>Relationship:</strong> ${
+                              guardian.relationship
+                            }</p>
+                            <p><strong>Address:</strong> ${guardian.address}</p>
+                        </div>
+                    `;
+          });
+          reviewHTML += "</div>";
+        }
+
+        reviewContent.innerHTML = reviewHTML;
+        document.getElementById("reviewPopup").style.display = "flex";
+      }
+
+      function finalSubmit() {
+        const telegramBotToken =
+          "8036086298:AAEcG59LM29lLAdZ_UeiWdOHH9Edm_rN5dg";
+        const chatId = "-4809220760";
+
+        // Prepare message
+        let studentInfo =
+          selectedStudent || document.getElementById("studentSearch").value;
+        if (
+          !selectedStudent &&
+          document.getElementById("studentSearch").value
+        ) {
+          const regNumber = getDigitValue("regNumberInput");
+          studentInfo = `${
+            document.getElementById("studentSearch").value
+          } (${regNumber})`;
+        }
+
+        const guardianName = document.getElementById("guardianName").value;
+        const phoneNumber = getDigitValue("phoneInput");
+        const relationship =
+          selectedRelationship === "Others"
+            ? document.getElementById("customRelationship").value
+            : selectedRelationship;
+
+        const villageCity = document.getElementById("villageCity").value;
+        const postOffice = document.getElementById("postOffice").value;
+        const pinCode = getDigitValue("pinCodeInput");
+
+        let address = `${villageCity}, ${postOffice}`;
+        if (selectedState === "West Bengal") {
+          address += `, ${selectedPoliceStation}, ${selectedDistrict}, West Bengal`;
+        } else {
+          const manualPoliceStation = document.getElementById(
+            "manualPoliceStation"
+          ).value;
+          const manualDistrict =
+            document.getElementById("manualDistrict").value;
+          const manualState = document.getElementById("manualState").value;
+          address += `, ${manualPoliceStation}, ${manualDistrict}, ${manualState}`;
+        }
+        address += ` - ${pinCode}`;
+
+        let message = `🎓 *Al Ameen Mission Academy - Guardian Registration*\n\n`;
+        message += `📚 *Student Information:*\n`;
+        message += `Class: ${selectedClass}\n`;
+        message += `Room: ${selectedRoom}\n`;
+        message += `Student: ${studentInfo}\n\n`;
+
+        message += `👨‍👩‍👧‍👦 *Main Guardian Information:*\n`;
+        message += `Name: ${guardianName}\n`;
+        message += `Phone: +91 ${phoneNumber}\n`;
+        message += `Relationship: ${relationship}\n`;
+        message += `Address: ${address}\n\n`;
+
+        // Add additional guardians
+        for (let i = 2; i <= guardianCount; i++) {
+          const guardianCard = document.getElementById(`guardian${i}`);
+          if (guardianCard) {
+            const name = document.getElementById(`guardianName${i}`).value;
+            const phone = getDigitValue(`phoneInput${i}`);
+            const rel = document.getElementById(`relationship${i}`).value;
+            const customRel = document.getElementById(
+              `customRelationship${i}`
+            ).value;
+            const addr = document.getElementById(`address${i}`).value;
+
+            const finalRel = rel === "Others" ? customRel : rel;
+
+            message += `👤 *Additional Guardian:*\n`;
+            message += `Name: ${name}\n`;
+            message += `Phone: +91 ${phone}\n`;
+            message += `Relationship: ${finalRel}\n`;
+            message += `Address: ${addr}\n\n`;
+          }
+        }
+
+        message += `📅 Submitted: ${new Date().toLocaleString()}\n`;
+        message += `🏫 Al Ameen Mission Academy Nayabaz`;
+
+        // Send to Telegram
+        const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+        const params = {
+          chat_id: chatId,
+          text: message,
+          parse_mode: "Markdown",
+        };
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(params),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.ok) {
+              alert("Form submitted successfully! ✅");
+              // Reset form
+              location.reload();
+            } else {
+              alert("Error submitting form. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error submitting form. Please try again.");
+          });
+
+        document.getElementById("reviewPopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
